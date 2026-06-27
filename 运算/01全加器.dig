@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<circuit>
+  <version>2</version>
+  <attributes/>
+  <visualElements>
+    <!-- 输入 -->
+    <visualElement>
+      <elementName>In</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Label</string>
+          <string>A_i</string>
+        </entry>
+        <entry>
+          <string>Description</string>
+          <string>加数A的第i位</string>
+        </entry>
+      </elementAttributes>
+      <pos x="-120" y="-160"/>
+    </visualElement>
+    <visualElement>
+      <elementName>In</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Label</string>
+          <string>B_i</string>
+        </entry>
+        <entry>
+          <string>Description</string>
+          <string>加数B的第i位</string>
+        </entry>
+      </elementAttributes>
+      <pos x="-120" y="-100"/>
+    </visualElement>
+    <visualElement>
+      <elementName>In</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Label</string>
+          <string>C_{i-1}</string>
+        </entry>
+        <entry>
+          <string>Description</string>
+          <string>来自低位的进位</string>
+        </entry>
+      </elementAttributes>
+      <pos x="-120" y="-40"/>
+    </visualElement>
+
+    <!-- 输出 -->
+    <visualElement>
+      <elementName>Out</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Label</string>
+          <string>S_i</string>
+        </entry>
+        <entry>
+          <string>Description</string>
+          <string>求和结果第i位</string>
+        </entry>
+      </elementAttributes>
+      <pos x="220" y="-140"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Out</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Label</string>
+          <string>C_i</string>
+        </entry>
+        <entry>
+          <string>Description</string>
+          <string>向高位的进位</string>
+        </entry>
+      </elementAttributes>
+      <pos x="220" y="-60"/>
+    </visualElement>
+
+    <!-- 第一个半加器: A + B -->
+    <visualElement>
+      <elementName>01半加.dig</elementName>
+      <elementAttributes/>
+      <pos x="-40" y="-200"/>
+    </visualElement>
+
+    <!-- 第二个半加器: (A+B) + C_{i-1} -->
+    <visualElement>
+      <elementName>01半加.dig</elementName>
+      <elementAttributes/>
+      <pos x="80" y="-120"/>
+    </visualElement>
+
+    <!-- 或门: 合并两个进位 -->
+    <visualElement>
+      <elementName>Or</elementName>
+      <elementAttributes>
+        <entry>
+          <string>wideShape</string>
+          <boolean>true</boolean>
+        </entry>
+      </elementAttributes>
+      <pos x="100" y="-20"/>
+    </visualElement>
+
+    <!-- 标签 -->
+    <visualElement>
+      <elementName>Text</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Text</string>
+          <string>全加器</string>
+        </entry>
+      </elementAttributes>
+      <pos x="0" y="-240"/>
+    </visualElement>
+  </visualElements>
+  <wires>
+    <!-- A_i 连接到 FA1.A -->
+    <wire>
+      <p1 x="-120" y="-160"/>
+      <p2 x="-20" y="-160"/>
+    </wire>
+    <!-- B_i 连接到 FA1.B -->
+    <wire>
+      <p1 x="-120" y="-100"/>
+      <p2 x="-20" y="-100"/>
+    </wire>
+    <!-- FA1.S 连接到 FA2.A -->
+    <wire>
+      <p1 x="100" y="-200"/>
+      <p2 x="100" y="-120"/>
+    </wire>
+    <!-- C_{i-1} 连接到 FA2.B -->
+    <wire>
+      <p1 x="-120" y="-40"/>
+      <p2 x="100" y="-100"/>
+    </wire>
+    <!-- FA2.S 连接到 S_i -->
+    <wire>
+      <p1 x="220" y="-120"/>
+      <p2 x="220" y="-140"/>
+    </wire>
+    <!-- FA1.C 连接到 OR -->
+    <wire>
+      <p1 x="60" y="-60"/>
+      <p2 x="100" y="-20"/>
+    </wire>
+    <!-- FA2.C 连接到 OR -->
+    <wire>
+      <p1 x="180" y="-80"/>
+      <p2 x="100" y="-40"/>
+    </wire>
+    <!-- OR 输出连接到 C_i -->
+    <wire>
+      <p1 x="140" y="-20"/>
+      <p2 x="220" y="-60"/>
+    </wire>
+  </wires>
+</circuit>
